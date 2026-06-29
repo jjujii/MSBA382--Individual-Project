@@ -1,0 +1,6 @@
+[theme]
+base="light"
+primaryColor="#6a5acd"           # warm "rude hue" accent
+backgroundColor="#fdfdfd"        # page background (off-white)
+secondaryBackgroundColor="#f2f2f2"  # boxes/sidebar background
+textColor="#333333"              # dark gray text

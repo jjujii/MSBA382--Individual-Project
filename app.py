@@ -548,7 +548,7 @@ def plot_smoking_bmi(df):
                     text=[f"{val:.0f}%" for val in data['Rate']],
                     textposition='outside',
                     textfont=dict(size=8, color='#1a202c'),
-                    showlegend=(status != 'Never')
+                    showlegend=True
                 ), row=1, col=1)
     
     # BMI
@@ -571,7 +571,7 @@ def plot_smoking_bmi(df):
         for bmi in ['Normal', 'Overweight', 'Obese']:
             data = bmi_df_plot[bmi_df_plot['BMI'] == bmi]
             if len(data) > 0:
-                color = '#667eea' if bmi == 'Normal' else '#764ba2' if bmi == 'Overweight' else '#a78bfa'
+                color = '#4682b4 ' if bmi == 'Normal' else '#000080' if bmi == 'Overweight' else '#483d8b'
                 fig.add_trace(go.Bar(
                     x=data['Gender'],
                     y=data['Rate'],
@@ -580,7 +580,7 @@ def plot_smoking_bmi(df):
                     text=[f"{val:.0f}%" for val in data['Rate']],
                     textposition='outside',
                     textfont=dict(size=8, color='#1a202c'),
-                    showlegend=False
+                    showlegend=True
                 ), row=1, col=2)
     
     fig.update_yaxes(title_text="Rate (%)", row=1, col=1)

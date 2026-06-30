@@ -361,8 +361,8 @@ def plot_gender_stroke_rates(df):
         xaxis_title='',
         yaxis_title='Stroke Rate (%)',
         template='plotly_white',
-        height=340,
-        margin=dict(l=40, r=15, t=50, b=15),
+        height=360,
+        margin=dict(l=40, r=15, t=70, b=15),
         hovermode='x unified',
         font=dict(color='#2d3748', size=11, family='Arial'),
         plot_bgcolor='#fafbfc',
@@ -423,7 +423,7 @@ def plot_age_gender(df, gender_filter='All Genders'):
         yaxis_title='Stroke Rate (%)',
         template='plotly_white',
         height=340,
-        margin=dict(l=40, r=15, t=50, b=15),
+        margin=dict(l=40, r=15, t=70, b=15),
         showlegend=False,
         font=dict(color='#2d3748', size=11, family='Arial'),
         plot_bgcolor='#fafbfc',
@@ -443,7 +443,8 @@ def plot_glucose_htn(df):
     fig = make_subplots(
         rows=1, cols=2,
         subplot_titles=("Males", "Females"),
-        specs=[[{'type': 'bar'}, {'type': 'bar'}]]
+        specs=[[{'type': 'bar'}, {'type': 'bar'}]],
+        shared_yaxes=True
     )
     
     for col_idx, (gender_val, gender_name) in enumerate([(0, 'Male'), (1, 'Female')], 1):
@@ -481,12 +482,13 @@ def plot_glucose_htn(df):
     
     fig.update_xaxes(title_text="", row=1, col=1)
     fig.update_xaxes(title_text="", row=1, col=2)
-    fig.update_yaxes(title_text="Rate (%)", row=1, col=1)
-    fig.update_yaxes(title_text="Rate (%)", row=1, col=2)
+    fig.update_yaxes(title_text="Rate (%)", row=1, col=1, matches='y')
+    fig.update_yaxes(title_text="", row=1, col=2)
+
     
     fig.update_layout(
         title={'text': 'Glucose x Hypertension Interaction', 'y':0.98, 'x':0.5, 'xanchor': 'center', 'yanchor': 'top', 'font': {'size': 16, 'color': '#1a202c', 'family': 'Arial'}},
-        height=340,
+        height=390,
         template='plotly_white',
         margin=dict(l=40, r=15, t=50, b=15),
         barmode='group',
@@ -507,7 +509,8 @@ def plot_smoking_bmi(df):
     fig = make_subplots(
         rows=1, cols=2,
         subplot_titles=("Smoking Status", "BMI Category"),
-        specs=[[{'type': 'bar'}, {'type': 'bar'}]]
+        specs=[[{'type': 'bar'}, {'type': 'bar'}]],
+        shared_yaxes=True
     )
     
     # Smoking
@@ -579,16 +582,16 @@ def plot_smoking_bmi(df):
                 ), row=1, col=2)
     
     fig.update_yaxes(title_text="Rate (%)", row=1, col=1)
-    fig.update_yaxes(title_text="Rate (%)", row=1, col=2)
-    fig.update_xaxes(title_text="", row=1, col=1)
-    fig.update_xaxes(title_text="", row=1, col=2)
+    fig.update_yaxes(title_text="", row=1, col=2)
+    fig.update_yaxes(title_text="Rate (%)", row=1, col=1, matches='y')
+    fig.update_yaxes(title_text="", row=1, col=2)
     
     fig.update_layout(
         title={'text': 'Smoking & BMI Impact', 'y':0.98, 'x':0.5, 'xanchor': 'center', 'yanchor': 'top', 'font': {'size': 16, 'color': '#1a202c', 'family': 'Arial'}},
         height=340,
         template='plotly_white',
         margin=dict(l=40, r=15, t=50, b=15),
-        legend=dict(font=dict(size=8), x=0.7, y=0.95),
+        legend=dict(font=dict(size=8)),
         barmode='group',
         hovermode='x unified',
         font=dict(color='#2d3748', size=10, family='Arial'),
@@ -711,6 +714,7 @@ if check_password():
         # Charts row 1
         col1, col2 = st.columns(2, gap="small")
         with col1:
+            st.markdown('<div style="height: 40px;"></div>', unsafe_allow_html=True)
             fig = plot_gender_stroke_rates(df_filtered)
             if fig:
                 st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})

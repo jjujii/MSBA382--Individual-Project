@@ -397,6 +397,7 @@ def plot_age_gender(df, gender_filter='All Genders'):
     age_order = ['Child', 'Young Adult', 'Middle Age', 'Senior']
     stroke_by_age['age_group'] = pd.Categorical(stroke_by_age['age_group'], categories=age_order, ordered=True)
     stroke_by_age = stroke_by_age.sort_values('age_group')
+
     
     # Choose color based on gender filter
     if gender_filter == 'Male':
@@ -433,6 +434,7 @@ def plot_age_gender(df, gender_filter='All Genders'):
     )
 
     return fig
+
 
 def plot_glucose_htn(df):
     """Glucose and HTN interaction."""
@@ -738,3 +740,5 @@ if check_password():
     with right_col:
         stroke_risk_calculator(df_original)
         st.markdown('</div>', unsafe_allow_html=True)
+
+
